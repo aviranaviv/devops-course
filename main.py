@@ -1,4 +1,4 @@
 from app import start_play, welcome
 
-welcome('Aviran Aviv')
+welcome()
 start_play()

@@ -1,5 +1,9 @@
-def welcome(username):
-    print(f'Hi {username} and welcome to the World of Games: The Epic Journey\n')
+def welcome():
+    while True:
+            print('Hello please enter your name: ')
+            name = str(input())
+            print(f'Hi {name} and welcome to the World of Games: The Epic Journey\n')
+            break
 
 def start_play():
     games_options = ['Memory Game', 'Guess Game', 'Currency Roulette']
@@ -10,16 +14,23 @@ def start_play():
           '3. Currency Roulette - try and guess the value of a random amount of USD in ILS\n')
 
     while True:
-        user_input = int(input())
-        if user_input > len(games_options) or user_input < 1:
-            print('Try Again you must to choose 1-3')
-        else: break
+        try:
+            user_input = int(input())
+            if user_input > len(games_options) or user_input < 1:
+                print('Try Again you must to choose 1-3')
+            else:
+                break
+        except ValueError:
+            print('Please enter a valid number')
 
     print('Please choose a game level between 1-5:')
     while True:
-        level = int(input())
-        if level < 1 or level > 5:
-            print('Try Again you must to choose 1-5')
-        else: break
+        try:
+            level = int(input())
+            if level < 1 or level > 5:
+                print('Try Again you must to choose 1-5')
+            else: break
+        except ValueError:
+            print('Please enter a valid number')
 
     print(f'Ok you chose the game "{games_options[user_input - 1]}" with level {level}')
