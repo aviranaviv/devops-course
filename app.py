@@ -19,7 +19,7 @@ def welcome():
 
 def get_game_choice():
     """Prompts the user to choose a game and validates the input."""
-    GAMES_MAP = {
+    games_map = {
         1: "Memory Game - a sequence of numbers will appear for 1 second and you have to guess it back.",
         2: "Guess Game - guess a number and see if you chose like the computer.",
         3: "Currency Roulette - try and guess the value of a random amount of USD in ILS."
@@ -27,19 +27,19 @@ def get_game_choice():
 
     print('--- Game Selection Menu ---')
     print('Please choose a game to play:')
-    for num, desc in GAMES_MAP.items():
+    for num, desc in games_map.items():
         print(f'{num}. {desc}')
     print('---------------------------\n')
 
     while True:
         try:
-            choice = int(input(f'Enter your choice (1-{len(GAMES_MAP)}): '))
+            choice = int(input(f'Enter your choice (1-{len(games_map)}): '))
 
-            if choice in GAMES_MAP:
+            if choice in games_map:
                 # Return choice and description for the main loop to store
-                return choice, GAMES_MAP[choice]
+                return choice, games_map[choice]
             else:
-                print(f'❌ Invalid choice. Please choose a number between 1 and {len(GAMES_MAP)}.')
+                print(f'❌ Invalid choice. Please choose a number between 1 and {len(games_map)}.')
         except ValueError:
             print('❌ Invalid input. Please enter a valid number.')
 
