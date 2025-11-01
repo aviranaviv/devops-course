@@ -17,11 +17,13 @@ def get_guess_from_user(level):
 def compare_results(actual_number, user_guess):
     if actual_number == user_guess:
         print('You guessed the correct number')
+        return True
     else:
         print('You guessed the wrong number')
+        return False
 
 
 def play(level):
     number = generate_number(level)
     user_guess = get_guess_from_user(level)
-    compare_results(number, user_guess)
+    return compare_results(number, user_guess)
