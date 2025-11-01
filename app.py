@@ -57,12 +57,8 @@ def get_level_choice():
         except ValueError:
             print('❌ Invalid input. Please enter a valid number.')
 
-
-def start_play():
-    """Main logic to get game and level, then play the game and report results."""
-
-    game_choice, game_description = get_game_choice()
-    level = get_level_choice()
+def play(game_choice, game_description, level):
+    """Prompts the user to choose a game and validates the input."""
 
     game_functions = {
         1: play_memory,
@@ -90,3 +86,45 @@ def start_play():
         print('An internal error occurred: Game function not found.')
 
     print('\n--- Game Over ---')
+
+    return True
+
+def user_play_decision(question):
+    user_choice = input(f'{question}\n')
+    while user_choice.lower() != 'y' and user_choice.lower() != 'n':
+        print('Please enter y/n')
+        user_choice = input()
+
+    if user_choice.lower() == 'y':
+        return True
+    else:
+        return False
+
+def play_again():
+    """Prompts the user to choose a game and validates the input."""
+    return user_play_decision('Do you want to play again? y/n')
+
+
+def play_the_same_game():
+    """Prompts the user to choose a game and validates the input."""
+    return user_play_decision('Do you want to play the same game again? y/n')
+
+
+def start_play():
+    """Main logic to get game and level, then play the game and report results."""
+    game_choice, game_description = get_game_choice()
+    level = get_level_choice()
+    game_is_over = play(game_choice, game_description, level)
+    while game_is_over:
+        user_want_play_again = play_again()
+        if user_want_play_again:
+            same_game = play_the_same_game()
+            if same_game:
+                play(game_choice, game_description, level)
+            else:
+                game_choice, game_description = get_game_choice()
+                level = get_level_choice()
+                play(game_choice, game_description, level)
+        else:
+            print('Goodbye!')
+            break
