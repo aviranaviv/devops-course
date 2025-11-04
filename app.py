@@ -3,7 +3,7 @@ import sys
 from games.memory_game import play as play_memory
 from games.guess_game import play as play_guess
 from games.currency_roulette_game import play as play_currency_roulette
-
+from score import add_score
 
 def welcome():
     """Prompts the user for their name and prints a welcome message."""
@@ -63,6 +63,7 @@ def get_level_choice():
 
 def play(game_choice, game_description, level):
     """Executes the selected game and reports the outcome."""
+    is_win = False
 
     game_functions = {
         1: play_memory,
@@ -82,6 +83,7 @@ def play(game_choice, game_description, level):
 
             if user_win:
                 print('🎉 Congratulations! You win!')
+                is_win = True
             else:
                 print('😔 Sorry, you lost!')
         except Exception as e:
@@ -90,6 +92,7 @@ def play(game_choice, game_description, level):
         print('An internal error occurred: Game function not found.')
 
     print('\n--- Game Over ---')
+    return is_win
 
 
 def user_play_decision(question):
@@ -126,7 +129,9 @@ def start_play():
             game_choice, game_description = get_game_choice()
             level = get_level_choice()
 
-        play(game_choice, game_description, level)
+        is_win = play(game_choice, game_description, level)
+        if is_win:
+            add_score(level)
 
         if not play_again():
             print('Goodbye! 👋')

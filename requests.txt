@@ -1,1 +1,0 @@
-currencyconverter==0.18.11

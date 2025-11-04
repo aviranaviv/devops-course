@@ -1,13 +1,12 @@
-import os
 import random
 from time import sleep
-
+from utils import screen_cleaner
 
 def generate_sequence(level):
     sequence_numbers = random.sample(range(1, 101), level)
     print(sequence_numbers)
     sleep(0.7)
-    os.system('clear')
+    screen_cleaner()
     return sequence_numbers
 
 def get_list_from_user(level):
